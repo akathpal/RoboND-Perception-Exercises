@@ -23,14 +23,24 @@ def get_normals(cloud):
 if __name__ == '__main__':
     rospy.init_node('capture_node')
 
+    # models = [\
+    #     'biscuits',
+    #     'soap',
+    #     'soap2',
+    #     'glue',
+    #     'eraser',
+    #     'snacks',
+    #     'sticky_notes',
+    #     'book']
     models = [\
-       'beer',
-       'bowl',
-       'create',
-       'disk_part',
-       'hammer',
-       'plastic_cup',
-       'soda_can']
+     'beer',
+     'bowl',
+     'create',
+     'disk_part',
+     'hammer',
+     'plastic_cup,
+     'soda_can']
+      
 
     # Disable gravity and delete the ground plane
     initial_setup()
@@ -39,7 +49,7 @@ if __name__ == '__main__':
     for model_name in models:
         spawn_model(model_name)
 
-        for i in range(5):
+        for i in range(50):
             # make five attempts to get a valid a point cloud then give up
             sample_was_good = False
             try_count = 0
@@ -55,7 +65,7 @@ if __name__ == '__main__':
                     sample_was_good = True
 
             # Extract histogram features
-            chists = compute_color_histograms(sample_cloud, using_hsv=False)
+            chists = compute_color_histograms(sample_cloud, using_hsv=True)
             normals = get_normals(sample_cloud)
             nhists = compute_normal_histograms(normals)
             feature = np.concatenate((chists, nhists))
