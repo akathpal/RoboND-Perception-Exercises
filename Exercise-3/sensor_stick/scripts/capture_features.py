@@ -38,7 +38,6 @@ if __name__ == '__main__':
      'create',
      'disk_part',
      'hammer',
-     'plastic_cup,
      'soda_can']
       
 
